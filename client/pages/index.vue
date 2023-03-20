@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
 
+useSeoMeta({
+    title: "Phongtro123.com - Kênh thông tin Phòng Trọ số 1 Việt Nam",
+});
 const toast = useToast();
 
 onMounted(() => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-    title: "LKC - Đăng ký",
+    title: "Phongtro123.com - Đăng ký",
 });
 </script>
 
