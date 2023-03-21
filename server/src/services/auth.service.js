@@ -40,4 +40,34 @@ const register = async ({ phone, name, password }) => {
     }
 };
 
-module.exports = { register };
+const login = async ({ phone, password }) => {
+    try {
+        const response = await db.User.findOne({
+            where: { phone },
+            raw: true,
+        });
+        const isCorrectPassword =
+            response && bcrypt.compareSync(password, response.password);
+        const token =
+            isCorrectPassword &&
+            jwt.sign(
+                { id: response.id, phone: response.phone },
+                process.env.SECRET_KEY,
+                { expiresIn: "2d" }
+            );
+        return {
+            err: token ? 0 : 2,
+            msg: token
+                ? "Login successfully!"
+                : response
+                ? "Password wrong"
+                : "Phone is not existed",
+            token: token || null,
+        };
+    } catch (error) {
+        console.log(error);
+        return { err: 1, msg: "failed to register service", error };
+    }
+};
+
+module.exports = { register, login };
