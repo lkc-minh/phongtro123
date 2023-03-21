@@ -12,11 +12,11 @@ const register = async ({ phone, name, password }) => {
     try {
         const response = await db.User.findOrCreate({
             where: { phone },
-            default: {
+            defaults: {
+                id: v4(),
                 phone,
                 name,
                 password: hashPassword(password),
-                id: v4(),
             },
         });
 
@@ -34,7 +34,10 @@ const register = async ({ phone, name, password }) => {
                 : "Phone number has been already existed",
             token: token || null,
         };
-    } catch (error) {}
+    } catch (error) {
+        console.log(error);
+        return { err: 1, msg: "failed to register service", error };
+    }
 };
 
 module.exports = { register };

@@ -10,10 +10,7 @@ const register = async (req, res) => {
             });
         }
         const response = await authService.register(req.body);
-        return res.status(200).json({
-            err: 0,
-            msg: "Register successfully!",
-        });
+        return res.json(response);
     } catch (error) {
         return res.status(500).json({
             err: -1,

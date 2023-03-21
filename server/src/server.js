@@ -13,10 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 
 connectionDb();
 
-app.use("/v1", routes);
+app.use("/api/v1", routes);
 
 const PORT = process.env.PORT || 1998;
 
 app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+    console.log(`Server listening on http://localhost:${PORT}`);
 });
